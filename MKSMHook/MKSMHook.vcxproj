@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{DB06E79F-46D8-46D0-AA6E-2BDFC6DB1658}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeBuildCommandLine>rebuild.bat</NMakeBuildCommandLine>
+    <NMakeOutput>MKSMHook.elf</NMakeOutput>
+    <NMakeCleanCommandLine>rebuild.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>rebuild.bat</NMakeBuildCommandLine>
+    <NMakeOutput>MKSMHook.elf</NMakeOutput>
+    <NMakeCleanCommandLine>rebuild.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeBuildCommandLine>rebuild.bat</NMakeBuildCommandLine>
+    <NMakeOutput>MKSMHook.elf</NMakeOutput>
+    <NMakeCleanCommandLine>rebuild.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>rebuild.bat</NMakeBuildCommandLine>
+    <NMakeOutput>MKSMHook.elf</NMakeOutput>
+    <NMakeCleanCommandLine>rebuild.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="linkfile" />
+    <None Include="makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="freecamera.c" />
+    <ClCompile Include="hook.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="menu.c" />
+    <ClCompile Include="mips.c" />
+    <ClCompile Include="mksm\camera.c" />
+    <ClCompile Include="mksm\core.c" />
+    <ClCompile Include="mksm\draw.c" />
+    <ClCompile Include="mksm\minterface.c" />
+    <ClCompile Include="mksm\pad.c" />
+    <ClCompile Include="mksm\pxMath.c" />
+    <ClCompile Include="mksm\string_dict.c" />
+    <ClCompile Include="mksm\vector.c" />
+    <ClCompile Include="mouse.c" />
+    <ClCompile Include="ps2mem.c" />
+    <ClCompile Include="select.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="freecamera.h" />
+    <ClInclude Include="hook.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="mips.h" />
+    <ClInclude Include="mksm\camera.h" />
+    <ClInclude Include="mksm\core.h" />
+    <ClInclude Include="mksm\draw.h" />
+    <ClInclude Include="mksm\menu.h" />
+    <ClInclude Include="mksm\minterface.h" />
+    <ClInclude Include="mksm\mksm.h" />
+    <ClInclude Include="mksm\monk.h" />
+    <ClInclude Include="mksm\pad.h" />
+    <ClInclude Include="mksm\pxMath.h" />
+    <ClInclude Include="mksm\string_dict.h" />
+    <ClInclude Include="mksm\vector.h" />
+    <ClInclude Include="mouse.h" />
+    <ClInclude Include="ps2mem.h" />
+    <ClInclude Include="select.h" />
+    <ClInclude Include="types.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\mksm">
+      <UniqueIdentifier>{cc5a6fc1-fb83-4993-997e-5967aa197424}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="linkfile">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\pad.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\core.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\string_dict.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mips.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ps2mem.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hook.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\draw.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\camera.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\vector.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="freecamera.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\pxMath.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\minterface.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="select.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mksm\mksm.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\pad.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\core.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\string_dict.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\monk.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mips.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ps2mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\menu.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\draw.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\camera.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\vector.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freecamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\pxMath.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\minterface.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="select.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
