@@ -40,7 +40,7 @@ void process_hook_in_game()
 #ifndef PS2_BUILD
 void hook_set_vector()
 {
-	static int a1 = {}, a2, _ra;
+	static int a1, a2, _ra;
 
 	asm volatile ("move %0, $ra" : "=r" (_ra));
 	asm volatile ("move %0, $a1" : "=r" (a1));
