@@ -1,5 +1,33 @@
 #include "mips.h"
 
+uint32_t lui(RegisterID rt, int32_t imm)
+{
+    return (0x3c000000 | (rt << OP_SH_RT) | (*(int32_t*)&imm & 0xffff));
+}
+
+uint32_t ori(RegisterID rt, RegisterID rs, int32_t imm)
+{
+    return (0x34000000 | (rt << OP_SH_RT) | (rs << OP_SH_RS) | (*(int32_t*)&imm & 0xffff));
+}
+uint32_t j(int32_t address)
+{
+    return ((0x08000000 | ((address & 0x0fffffff) >> 2)));
+}
+uint32_t jal(int32_t address)
+{
+    return ((0x0C000000 | ((address & 0x0fffffff) >> 2)));
+}
+uint32_t jalr(RegisterID rs)
+{
+    return (0x0000f809 | (rs << OP_SH_RS));
+}
+uint32_t jr(RegisterID rs)
+{
+    return (0x00000008 | (rs << OP_SH_RS));
+}
+
+#ifndef  PS2_BUILD
+
 uint16_t swap16(uint16_t value)
 {
     return (value << 8) | (value >> 8);
@@ -431,14 +459,6 @@ uint32_t dsubu(RegisterID rd, RegisterID rs, RegisterID rt)
 {
     return (0x0000002f | (rd << OP_SH_RD) | (rs << OP_SH_RS) | (rt << OP_SH_RT));
 }
-uint32_t jalr(RegisterID rs)
-{
-    return (0x0000f809 | (rs << OP_SH_RS));
-}
-uint32_t jr(RegisterID rs)
-{
-    return (0x00000008 | (rs << OP_SH_RS));
-}
 uint32_t mfhi(RegisterID rd)
 {
     return (0x00000010 | (rd << OP_SH_RD));
@@ -563,10 +583,6 @@ uint32_t lhu(RegisterID rt, RegisterID rs, int32_t offset)
 {
     return (0x94000000 | (rt << OP_SH_RT) | (rs << OP_SH_RS) | (offset & 0xffff));
 }
-uint32_t lui(RegisterID rt, int32_t imm)
-{
-    return (0x3c000000 | (rt << OP_SH_RT) | (*(int32_t*)&imm & 0xffff));
-}
 uint32_t lw(RegisterID rt, RegisterID rs, int32_t offset)
 {
     return (0x8c000000 | (rt << OP_SH_RT) | (rs << OP_SH_RS) | (offset & 0xffff));
@@ -582,10 +598,6 @@ uint32_t lwr(RegisterID rt, RegisterID rs, int32_t offset)
 uint32_t lwu(RegisterID rt, RegisterID rs, int32_t offset)
 {
     return (0x9C000000 | (rt << OP_SH_RT) | (rs << OP_SH_RS) | (offset & 0xffff));
-}
-uint32_t ori(RegisterID rt, RegisterID rs, int32_t imm)
-{
-    return (0x34000000 | (rt << OP_SH_RT) | (rs << OP_SH_RS) | (*(int32_t*)&imm & 0xffff));
 }
 uint32_t sq(RegisterID rt, RegisterID rs, int32_t offset)
 {
@@ -631,14 +643,6 @@ uint32_t li(RegisterID dest, int32_t imm)
 {
     return (0x34000000 | (dest << OP_SH_RT) | (*(int32_t*)&imm & 0xffff));
 }
-uint32_t j(int32_t address)
-{
-    return ((0x08000000 | ((address & 0x0fffffff) >> 2)));
-}
-uint32_t jal(int32_t address)
-{
-    return ((0x0C000000 | ((address & 0x0fffffff) >> 2)));
-}
 uint32_t b(int32_t imm)
 {
     return (0x10000000 | (imm & 0xffff));
@@ -660,3 +664,4 @@ uint32_t moveq(RegisterID rd, RegisterID rs)
 {
     return (0x700004a9 | (rd << OP_SH_RD) | (rs << OP_SH_RS));
 }
+#endif

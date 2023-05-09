@@ -2,7 +2,7 @@
 #include "freecamera.h"
 #include "mouse.h"
 
-char buffer[256];
+char buffer[256] = { 0 };
 int m_nCurrentPos = 0;
 int m_nTimer = 0;
 int m_nCurrentMenuOpen = -1;
@@ -22,11 +22,17 @@ char* m_szMenuOptions[TOTAL_MENUS] = {
 
 menu_entry CameraOptions[] =
 {
+#ifndef PS2_BUILD
 	{"Free Camera", &ms_FreeCamera, 0, "Use keyboard to move the camera. Shortcut - G"},
 	{"Absolute Controls", &ms_FreeCameraAbsoluteControls, 0, "Move X and Z without camera matrix. Don't disable for now."},
+#else
+	{"Free Camera", &ms_FreeCamera, 0, "Use keyboard to move the camera."},
+#endif
+
 	{"Increase FOV", 0, add_fov, "Only works in free camera."},
 	{"Decrease FOV", 0, dec_fov, "Only works in free camera."},
 	{"Reset FOV", 0, reset_fov, "Only works in free camera."},
+	{"Update Flag", (int*)0x511378, 0, "Freezes player and entities while in free camera."}
 };
 
 menu_entry GameOptions[] =
@@ -41,7 +47,11 @@ menu_entry GameOptions[] =
 menu_entry MiscOptions[] =
 {
 	{"Debug Menu", &ms_SwapToDebug, 0, "Swaps Continue option in pause menu."},
+#ifndef PS2_BUILD
 	{"Freeze Characters",0, toggle_freeze_world, "Shortcut - H"}
+#else
+	{"Freeze Characters",0, toggle_freeze_world, ""}
+#endif
 };
 
 void initialize_menu()
@@ -171,8 +181,6 @@ void menu_draw()
 
 void menu_update()
 {
-
-
 	if (ms_MenuActive)
 	{
 		int buttons = PxPad_GetButtons(0);
@@ -297,7 +305,6 @@ void open_debug_menu()
 {
 	ms_MenuActive = false;
 	((void(*)(int))0x1A8788)(MENU_ITEM_PTR);
-
 }
 
 void toggle_freeze_world()

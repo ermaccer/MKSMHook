@@ -17,10 +17,11 @@ void custom_select_screen()
 		if (p1_buttons & PAD_DOWN)
 			chr++;
 
-		if (chr < 0) chr = NUM_CHARACTERS - 1;
-		if (chr + 1 > NUM_CHARACTERS) chr = 0;
-
+		if (chr < 0) chr = NUM_CHARACTERS;
+		if (chr > NUM_CHARACTERS) chr = 0;
+#ifndef PS2_BUILD
 		_printf("Character %03d : %s\n", chr, get_character_name(chr));
+#endif // !PS2_BUILD
 
 		sel->characters[cursor].stringID = CHARACTER_STRING_START + chr;
 		sel->characters[cursor].characterID = chr;
@@ -36,11 +37,11 @@ void custom_select_screen()
 		if (p2_buttons & PAD_DOWN)
 			chr++;
 
-		if (chr < 0) chr = NUM_CHARACTERS - 1;
-		if (chr + 1 > NUM_CHARACTERS) chr = 0;
-
+		if (chr < 0) chr = NUM_CHARACTERS;
+		if (chr > NUM_CHARACTERS) chr = 0;
+#ifndef PS2_BUILD
 		_printf("P2 Character %03d : %s\n", chr, get_character_name(chr));
-
+#endif // !PS2_BUILD
 		sel->characters[cursor].stringID = CHARACTER_STRING_START + chr;
 		sel->characters[cursor].characterID = chr;
 

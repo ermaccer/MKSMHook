@@ -24,6 +24,15 @@
     <None Include="linkfile">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="eemakefile.eeglobal">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="linkfile_ps2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\README.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -132,6 +141,9 @@
     </ClInclude>
     <ClInclude Include="select.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="build_config.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

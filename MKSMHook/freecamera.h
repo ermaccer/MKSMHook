@@ -1,6 +1,15 @@
 #pragma once
 #include "mksm/mksm.h"
 
+
+/* PS2 CONTROL SCHEME
+D-Pad - movement
+Butttons - rotation
+L1/R1 - up/down
+L2/R2 - tilt
+SELECT - speed up
+*/
+
 extern vector camPos;
 extern vector camRot;
 

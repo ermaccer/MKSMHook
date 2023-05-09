@@ -23,4 +23,14 @@ enum PAD_ENUM
 
 };
 
-int PxPad_GetButtons(int id);
+enum PxPad_AnalogStruct {
+	L_X,
+	L_Y,
+	R_X,
+	R_Y,
+	MaxAnalog
+};
+
+int  PxPad_GetButtons(int id);
+int  PxPad_GetRawButtons(int id);
+void PxPad_GetAnalogValues(int id, char* buff);

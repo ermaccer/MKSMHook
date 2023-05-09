@@ -5,10 +5,9 @@
 #include "mksm/pxMath.h"
 #include "menu.h"
 
-char buff[512];
 
-vector camPos = {};
-vector camRot = {};
+vector camPos = { 0 };
+vector camRot = { 0 };
 
 // 214688 
 void activate_freecam()
@@ -64,13 +63,17 @@ void process_freecam()
 
 void freecamera_control()
 {
+	if (ms_MenuActive)
+		return;
+
 	Camera* cam = CameraManager_GetCurrentCamera();
 	matrix* camMat = ((matrix* (*)(void))0x224E28)();
 	matrix m = *camMat;
 
+	int pad = PxPad_GetRawButtons(0);
 	static float camSpeed = 25.0f;
 
-	if (GetAsyncKeyState(90))
+	if (GetAsyncKeyState(90) || pad & PAD_SELECT)
 		camSpeed = 50.0f;
 	else
 		camSpeed = 25.0f;
@@ -82,6 +85,7 @@ void freecamera_control()
 	vector u = { m.M[3][0], m.M[3][1], m.M[3][2] };
 
 #ifdef DEBUG
+	static char buff[512] = { 0 };
 	_sprintf(buff, "FORWARD %f %f %f\n", forward.x, forward.y, forward.z);
 	_printf(buff);
 	_sprintf(buff, "RIGHT %f %f %f\n", right.x, right.y, right.z);
@@ -93,23 +97,22 @@ void freecamera_control()
 #endif // _DEBUG
 
 
-
 	if (ms_FreeCameraAbsoluteControls == true)
 	{
-		if (GetAsyncKeyState(87))
+		if (GetAsyncKeyState(87) || pad & PAD_UP)
 		{
 			camPos.z += camSpeed;
 		}
-		if (GetAsyncKeyState(83))
+		if (GetAsyncKeyState(83) || pad & PAD_DOWN)
 		{
 			camPos.z -= camSpeed;
 		}
 
-		if (GetAsyncKeyState(65))
+		if (GetAsyncKeyState(65) || pad & PAD_LEFT)
 		{
 			camPos.x -= camSpeed;
 		}
-		if (GetAsyncKeyState(68))
+		if (GetAsyncKeyState(68) || pad & PAD_RIGHT)
 		{
 			camPos.x += camSpeed;
 		}
@@ -144,24 +147,24 @@ void freecamera_control()
 
 	}
 
-	if (GetAsyncKeyState(81))
+	if (GetAsyncKeyState(81) || pad & PAD_L1)
 		camPos.y += camSpeed;
-	if (GetAsyncKeyState(69))
+	if (GetAsyncKeyState(69) || pad & PAD_R1)
 		camPos.y -= camSpeed;
 
-	if (GetAsyncKeyState(37))
+	if (GetAsyncKeyState(37) || pad & PAD_SQUARE)
 		camRot.y -= camSpeed;
-	if (GetAsyncKeyState(39))
+	if (GetAsyncKeyState(39) || pad & PAD_CIRCLE)
 		camRot.y += camSpeed;
 
-	if (GetAsyncKeyState(38))
+	if (GetAsyncKeyState(38) || pad & PAD_TRIANGLE)
 		camRot.x += camSpeed;
-	if (GetAsyncKeyState(40))
+	if (GetAsyncKeyState(40) || pad & PAD_CROSS)
 		camRot.x -= camSpeed;
 
-	if (GetAsyncKeyState(88))
+	if (GetAsyncKeyState(88) || pad & PAD_L2)
 		camRot.z -= camSpeed;
-	if (GetAsyncKeyState(67))
+	if (GetAsyncKeyState(67) || pad & PAD_R2)
 		camRot.z += camSpeed;
 }
 

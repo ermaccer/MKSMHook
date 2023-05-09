@@ -1,6 +1,7 @@
 #ifndef H_MIPS
 #define H_MIPS
 #include <stdint.h>
+#include "build_config.h"
 
 typedef enum Register {
     r0 = 0,
@@ -132,6 +133,15 @@ enum {
     FP_CAUSE_INVALID_OPERATION = 1 << 16 // FCSR Bits
 };
 
+
+uint32_t lui(RegisterID rt, int32_t imm);
+uint32_t ori(RegisterID rt, RegisterID rs, int32_t imm);
+uint32_t j(int32_t address);
+uint32_t jal(int32_t address);
+uint32_t jalr(RegisterID rs);
+uint32_t jr(RegisterID rs);
+
+#ifndef  PS2_BUILD
 uint32_t write_directly(uint32_t data);
 uint32_t nop();
 uint32_t bc0f(int32_t offset);
@@ -235,8 +245,6 @@ uint32_t dsrl(RegisterID rd, RegisterID rt, int32_t shamt);
 uint32_t dsrl32(RegisterID rd, RegisterID rt, int32_t shamt);
 uint32_t dsrlv(RegisterID rd, RegisterID rt, RegisterID rs);
 uint32_t dsubu(RegisterID rd, RegisterID rs, RegisterID rt);
-uint32_t jalr(RegisterID rs);
-uint32_t jr(RegisterID rs);
 uint32_t mfhi(RegisterID rd);
 uint32_t mflo(RegisterID rd);
 uint32_t movn(RegisterID rd, RegisterID rs, RegisterID rt);
@@ -268,12 +276,10 @@ uint32_t ldl(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t ldr(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t lh(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t lhu(RegisterID rt, RegisterID rs, int32_t offset);
-uint32_t lui(RegisterID rt, int32_t imm);
 uint32_t lw(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t lwl(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t lwr(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t lwu(RegisterID rt, RegisterID rs, int32_t offset);
-uint32_t ori(RegisterID rt, RegisterID rs, int32_t imm);
 uint32_t sq(RegisterID rt, RegisterID rs, int32_t offset);
 uint32_t slti(RegisterID rt, RegisterID rs, int32_t imm);
 uint32_t sltiu(RegisterID rt, RegisterID rs, int32_t imm);
@@ -285,14 +291,12 @@ uint32_t lwc1(FPRegisterID ft, RegisterID rs, int32_t offset);
 uint32_t swc1(FPRegisterID ft, RegisterID rs, int32_t offset);
 uint32_t xori(RegisterID rt, RegisterID rs, int32_t imm);
 uint32_t li(RegisterID dest, int32_t imm);
-uint32_t j(int32_t address);
-uint32_t jal(int32_t address);
 uint32_t b(int32_t imm);
 uint32_t beq(RegisterID rs, RegisterID rt, int32_t imm);
 uint32_t bne(RegisterID rs, RegisterID rt, int32_t imm);
 uint32_t move(RegisterID rd, RegisterID rs);
 uint32_t moveq(RegisterID rd, RegisterID rs);
-
+#endif // ! PS2_BUILD
 /*
  * https://github.com/WebKit/webkit/blob/master/Source/JavaScriptCore/assembler/MIPSAssembler.h
  * Copyright (C) 2009-2017 Apple Inc. All rights reserved.

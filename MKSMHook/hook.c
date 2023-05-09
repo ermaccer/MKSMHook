@@ -10,12 +10,13 @@ void process_hook_in_game()
 
 	if (buttons & PAD_L3)
 		ms_MenuActive = !ms_MenuActive;
-
+#ifndef PS2_BUILD
 	if (GetAsyncKeyState(72))
 		toggle_freeze_world();
 
 	if (GetAsyncKeyState(71))
 		toggle_free_camera();
+#endif
 
 	Camera* cam = CameraManager_GetCurrentCamera();
 	if (cam)
@@ -36,9 +37,10 @@ void process_hook_in_game()
 
 }
 
+#ifndef PS2_BUILD
 void hook_set_vector()
 {
-	static int a1, a2, _ra;
+	static int a1 = {}, a2, _ra;
 
 	asm volatile ("move %0, $ra" : "=r" (_ra));
 	asm volatile ("move %0, $a1" : "=r" (a1));
@@ -57,3 +59,6 @@ void hook_set_vector()
 	asm volatile ("jr      $ra");
 	asm volatile ("nop");
 }
+
+#endif // !PS2_BUILD
+

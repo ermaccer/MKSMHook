@@ -25,7 +25,11 @@ void cursor_hook(int a0, int a1, int a2)
 void init()
 {
      initialize_menu();
+#ifndef PS2_BUILD
      _printf("MKSMHook init! Version: %s\n", MKSMHOOK_VERSION);
+#endif // !PS2_BUILD
+
+
 
      makeJal(0x1D4F98, game_loop_hook);
      makeJal(0x1D9A50, game_loop_hook);
@@ -41,3 +45,14 @@ int main()
 {
     return 0;
 }
+
+
+#ifdef PS2_BUILD
+void INVOKER()
+{
+    asm("ei\n");
+    asm("addiu $ra, -4\n");
+
+    init();
+}
+#endif // PS2_BUILD
