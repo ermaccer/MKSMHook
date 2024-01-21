@@ -14,6 +14,9 @@ mksm\minterface.o \
 freecamera.o \
 mksm\pxMath.o \
 mksm\string_dict.o \
+mksm\actor.o \
+mksm\actorManager.o \
+mksm\object.o \
 select.o
 
 
@@ -36,11 +39,9 @@ else
 EE_LINKFILE = linkfile
 endif
 
-ifeq ($(PS2_BUILD), 1)
-EE_CFLAGS =  -fno-zero-initialized-in-bss
-endif
+EE_CFLAGS =  -fno-zero-initialized-in-bss  -O0
 
-EE_LDFLAGS = -Wl,--entry=init -Wl,-Map,../scripts/MKSMHook.map -Wl,'--defsym=BASE_ADDRESS=$(BASE_ADDRESS)'
+EE_LDFLAGS = -Wl,--entry=init -Wl,-Map,../scripts/MKSMHook.map -Wl,'--defsym=BASE_ADDRESS=$(BASE_ADDRESS)' 
 
 all: $(EE_BIN)
 

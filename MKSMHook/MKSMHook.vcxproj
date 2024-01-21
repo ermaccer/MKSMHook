@@ -105,10 +105,13 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="mips.c" />
+    <ClCompile Include="mksm\actor.c" />
+    <ClCompile Include="mksm\actorManager.c" />
     <ClCompile Include="mksm\camera.c" />
     <ClCompile Include="mksm\core.c" />
     <ClCompile Include="mksm\draw.c" />
     <ClCompile Include="mksm\minterface.c" />
+    <ClCompile Include="mksm\object.c" />
     <ClCompile Include="mksm\pad.c" />
     <ClCompile Include="mksm\pxMath.c" />
     <ClCompile Include="mksm\string_dict.c" />
@@ -123,6 +126,8 @@
     <ClInclude Include="hook.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="mips.h" />
+    <ClInclude Include="mksm\actor.h" />
+    <ClInclude Include="mksm\actorManager.h" />
     <ClInclude Include="mksm\camera.h" />
     <ClInclude Include="mksm\core.h" />
     <ClInclude Include="mksm\draw.h" />
@@ -130,6 +135,7 @@
     <ClInclude Include="mksm\minterface.h" />
     <ClInclude Include="mksm\mksm.h" />
     <ClInclude Include="mksm\monk.h" />
+    <ClInclude Include="mksm\object.h" />
     <ClInclude Include="mksm\pad.h" />
     <ClInclude Include="mksm\pxMath.h" />
     <ClInclude Include="mksm\string_dict.h" />

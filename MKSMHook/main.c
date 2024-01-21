@@ -41,14 +41,10 @@ void init()
      makeJal(0x1EB988, hook_player_control);
 }
 
-int main()
-{
-    return 0;
-}
-
 
 #ifdef PS2_BUILD
-void INVOKER()
+// needs to be 03 because O0 ironically does some funky stuff with this function
+void __attribute__((optimize("O3"))) INVOKER()
 {
     asm("ei\n");
     asm("addiu $ra, -4\n");
@@ -56,3 +52,11 @@ void INVOKER()
     init();
 }
 #endif // PS2_BUILD
+
+
+
+
+int __attribute__((optimize("O3"))) main()
+{
+    return 0;
+}

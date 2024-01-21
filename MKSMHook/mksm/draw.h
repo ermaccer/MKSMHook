@@ -10,4 +10,5 @@ FF0000 FF - yellow
 
 */
 
+void PrintTextCentered(int x, int y, int color, int font, char* text);
 void PrintText(int x, int y, int color, int font, char* text);

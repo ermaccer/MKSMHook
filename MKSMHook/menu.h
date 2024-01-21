@@ -6,6 +6,7 @@
 enum eMenuItems {
 	MENU_CAMERA,
 	MENU_GAME,
+	MENU_ENEMY_SPAWNER,
 	MENU_MISC,
 	TOTAL_MENUS
 };
@@ -50,5 +51,7 @@ void toggle_free_camera();
 void add_fov();
 void dec_fov();
 void reset_fov();
+void reset_enemies();
+void spawn_enemies();
 // hooks 
 void hook_player_control(int a0, int a1);

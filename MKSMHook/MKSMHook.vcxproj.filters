@@ -83,6 +83,15 @@
     <ClCompile Include="select.c">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="mksm\actorManager.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\actor.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
+    <ClCompile Include="mksm\object.c">
+      <Filter>Header Files\mksm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mksm\mksm.h">
@@ -144,6 +153,15 @@
     </ClInclude>
     <ClInclude Include="build_config.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\actor.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\actorManager.h">
+      <Filter>Header Files\mksm</Filter>
+    </ClInclude>
+    <ClInclude Include="mksm\object.h">
+      <Filter>Header Files\mksm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

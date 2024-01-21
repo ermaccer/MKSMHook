@@ -16,6 +16,7 @@ int32 ms_FreezeWorld = false;
 char* m_szMenuOptions[TOTAL_MENUS] = {
 	"Camera",
 	"Game",
+	"Enemy Spawner",
 	"Misc."
 };
 
@@ -54,6 +55,24 @@ menu_entry MiscOptions[] =
 #endif
 };
 
+menu_entry SpawnerOptions[] =
+{
+	{"Enemy 1", (int*)0x515DE0, 0, "T"},
+	{"Enemy 1 Amount",(int*)0x515DF0, 0, ""},
+
+	{"Enemy 2", (int*)0x515DE4, 0, "T"},
+	{"Enemy 2 Amount",(int*)0x0515DF4, 0, ""},
+
+	{"Enemy 3", (int*)0x515DE8, 0, "T"},
+	{"Enemy 3 Amount",(int*)0x515DF8, 0, ""},
+
+	{"Enemy 4", (int*)0x515DEC, 0, "T"},
+	{"Enemy 4 Amount",(int*)0x515DFC, 0, ""},
+
+	{"Spawn Enemies",0, spawn_enemies, ""},
+	{"Reset Values",0, reset_enemies, ""}
+};
+
 void initialize_menu()
 {
 	m_nCurrentPos = 0;
@@ -80,6 +99,9 @@ void menu_draw()
 		case MENU_GAME:
 			total = sizeof(GameOptions) / sizeof(GameOptions[0]);
 			break;
+		case MENU_ENEMY_SPAWNER:
+			total = sizeof(SpawnerOptions) / sizeof(SpawnerOptions[0]);
+			break;
 		case MENU_MISC:
 			total = sizeof(MiscOptions) / sizeof(MiscOptions[0]);
 			break;
@@ -99,17 +121,16 @@ void menu_draw()
 
 				if (CameraOptions[i].tip && i == m_nCurrentPos)
 				{
-					PrintText(323, 398, -1, 1, CameraOptions[i].tip);
-					PrintText(320, 395, 255, 1, CameraOptions[i].tip);
+					PrintTextCentered(323, 398, -1, 1, CameraOptions[i].tip);
+					PrintTextCentered(320, 395, 255, 1, CameraOptions[i].tip);
 				}
 
-
-				PrintText(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
+				PrintTextCentered(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
 
 				if (i == m_nCurrentPos)
-					PrintText(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
+					PrintTextCentered(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
 				else
-					PrintText(320, 110 + (i * 22), 255, 2, buffer);
+					PrintTextCentered(320, 110 + (i * 22), 255, 2, buffer);
 			}
 		}
 		else if (m_nCurrentMenuOpen == MENU_MISC)
@@ -123,17 +144,17 @@ void menu_draw()
 					_sprintf(buffer, "%s", MiscOptions[i].name);
 				if (MiscOptions[i].tip && i == m_nCurrentPos)
 				{
-					PrintText(323, 398, -1, 1, MiscOptions[i].tip);
-					PrintText(320, 395, 255, 1, MiscOptions[i].tip);
+					PrintTextCentered(323, 398, -1, 1, MiscOptions[i].tip);
+					PrintTextCentered(320, 395, 255, 1, MiscOptions[i].tip);
 				}
 
 
-				PrintText(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
+				PrintTextCentered(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
 
 				if (i == m_nCurrentPos)
-					PrintText(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
+					PrintTextCentered(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
 				else
-					PrintText(320, 110 + (i * 22), 255, 2, buffer);
+					PrintTextCentered(320, 110 + (i * 22), 255, 2, buffer);
 			}
 		}
 		else if (m_nCurrentMenuOpen == MENU_GAME)
@@ -147,35 +168,71 @@ void menu_draw()
 					_sprintf(buffer, "%s", GameOptions[i].name);
 				if (GameOptions[i].tip && i == m_nCurrentPos)
 				{
-					PrintText(323, 398, -1, 1, GameOptions[i].tip);
-					PrintText(320, 395, 255, 1, GameOptions[i].tip);
+					PrintTextCentered(323, 398, -1, 1, GameOptions[i].tip);
+					PrintTextCentered(320, 395, 255, 1, GameOptions[i].tip);
 				}
 
 
-				PrintText(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
+				PrintTextCentered(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
 
 
 				if (i == m_nCurrentPos)
-					PrintText(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
+					PrintTextCentered(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
 				else
-					PrintText(320, 110 + (i * 22), 255, 2, buffer);
+					PrintTextCentered(320, 110 + (i * 22), 255, 2, buffer);
+			}
+		}
+		else if (m_nCurrentMenuOpen == MENU_ENEMY_SPAWNER)
+		{
+			for (int i = 0; i < total; i++)
+			{
+				if (SpawnerOptions[i].tip[0] == 'T' && SpawnerOptions[i].toggle)
+				{
+					char* charName = get_character_name(*SpawnerOptions[i].toggle);
+					if (*SpawnerOptions[i].toggle == 0)
+					{
+						charName = "None";
+					}
+					_sprintf(buffer, "%s - %s (ID %03d)", SpawnerOptions[i].name,charName , *SpawnerOptions[i].toggle);
+				}
+
+				else if (SpawnerOptions[i].toggle)
+					_sprintf(buffer, "%s - %d", SpawnerOptions[i].name, *SpawnerOptions[i].toggle);
+
+
+				if (SpawnerOptions[i].func)
+					_sprintf(buffer, "%s", SpawnerOptions[i].name);
+				if (SpawnerOptions[i].tip && i == m_nCurrentPos && !(SpawnerOptions[i].tip[0] == 'T'))
+				{
+					PrintTextCentered(323, 398, -1, 1, SpawnerOptions[i].tip);
+					PrintTextCentered(320, 395, 255, 1, SpawnerOptions[i].tip);
+				}
+
+
+				PrintTextCentered(320 + 5, 110 + (i * 22) + 5, -1, 2, buffer);
+
+
+				if (i == m_nCurrentPos)
+					PrintTextCentered(320, 110 + (i * 22), 0xFF0000FF, 2, buffer);
+				else
+					PrintTextCentered(320, 110 + (i * 22), 255, 2, buffer);
 			}
 		}
 		else
 		{
 			for (int i = 0; i < total; i++)
 			{
-				PrintText(320 + 5, 110 + (i * 22) + 5, -1, 2, m_szMenuOptions[i]);
+				PrintTextCentered(320 + 5, 110 + (i * 22) + 5, -1, 2, m_szMenuOptions[i]);
 
 				if (i == m_nCurrentPos)
-					PrintText(320, 110 + (i * 22), 0xFF0000FF, 2, m_szMenuOptions[i]);
+					PrintTextCentered(320, 110 + (i * 22), 0xFF0000FF, 2, m_szMenuOptions[i]);
 				else
-					PrintText(320, 110 + (i * 22), 255, 2, m_szMenuOptions[i]);
+					PrintTextCentered(320, 110 + (i * 22), 255, 2, m_szMenuOptions[i]);
 			}
 
 		}
 		
-		PrintText(160, 425, 255, 1, "MKSMHook " MKSMHOOK_VERSION " by ermaccer");
+		PrintTextCentered(160, 425, 255, 1, "MKSMHook " MKSMHOOK_VERSION " by ermaccer");
 	}
 }
 
@@ -255,12 +312,37 @@ void menu_update()
 					if (GameOptions[m_nCurrentPos].func)
 						GameOptions[m_nCurrentPos].func();
 					break;
+				case MENU_ENEMY_SPAWNER:
+					if (SpawnerOptions[m_nCurrentPos].toggle)
+					{
+						*SpawnerOptions[m_nCurrentPos].toggle += 1;
+						if (*SpawnerOptions[m_nCurrentPos].toggle > 90)
+							*SpawnerOptions[m_nCurrentPos].toggle = 0;
+					}
+					if (SpawnerOptions[m_nCurrentPos].func)
+						SpawnerOptions[m_nCurrentPos].func();
+					break;
 				default:
 					break;
 				}
 			}
 		}
-
+		if (buttons & PAD_CIRCLE)
+		{
+			switch (m_nCurrentMenuOpen)
+			{
+			case MENU_ENEMY_SPAWNER:
+				if (SpawnerOptions[m_nCurrentPos].toggle)
+				{
+					*SpawnerOptions[m_nCurrentPos].toggle -= 1;
+					if (*SpawnerOptions[m_nCurrentPos].toggle < 0)
+						*SpawnerOptions[m_nCurrentPos].toggle = 90;
+				}
+				break;
+			default:
+				break;
+			}
+		}
 		int total = TOTAL_MENUS;
 
 		if (m_nCurrentMenuOpen == MENU_CAMERA)
@@ -269,6 +351,8 @@ void menu_update()
 			total = sizeof(MiscOptions) / sizeof(MiscOptions[0]);
 		else if (m_nCurrentMenuOpen == MENU_GAME)
 			total = sizeof(GameOptions) / sizeof(GameOptions[0]);
+		else if (m_nCurrentMenuOpen == MENU_ENEMY_SPAWNER)
+			total = sizeof(SpawnerOptions) / sizeof(SpawnerOptions[0]);
 		if (m_nCurrentPos + 1 > total) m_nCurrentPos = 0;
 		if (m_nCurrentPos < 0) m_nCurrentPos = total - 1;
 	}
@@ -346,6 +430,25 @@ void dec_fov()
 void reset_fov()
 {
 	*(float*)0x4F4D4C= 700.0f;
+}
+
+void reset_enemies()
+{
+	*(int*)0x515DE0 = 0;
+	*(int*)0x515DE4 = 0;
+	*(int*)0x515DE8 = 0;
+	*(int*)0x515DEC = 0;
+
+	*(int*)0x515DF0 = 0;
+	*(int*)0x515DF4 = 0;
+	*(int*)0x515DF8 = 0;
+	*(int*)0x515DFC = 0;
+}
+
+void spawn_enemies()
+{
+	((int(*)(void))0x308010)();
+	ms_MenuActive = false;
 }
 
 void hook_player_control(int a0, int a1)
